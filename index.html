@@ -1,343 +1,177 @@
 <!DOCTYPE html>
-<!-- Chosen Palette: Warm Neutrals (Slate, Zinc, Teal Accent) -->
-<!-- Application Structure Plan: A single-page report with a fixed sidebar navigation for quick jumps between key persona sections: Overview, Demographics, Interests/Online Behavior, Pain Points, What They Want/Expect, and Buying Behavior. Each section will use a card-based layout to present concise, actionable information directly from the provided summary, ensuring quick readability and comprehension without altering the original text. -->
-<!-- Visualization & Content Choices: 
-- KPI Cards (Overview): Goal: Inform. Method: Styled HTML/CSS. Justification: Provides a quick, scannable summary.
-- All other sections: Use HTML/CSS cards, lists, and bolding to present detailed points from the summary. Justification: Maintains original text while enhancing readability and visual separation.
-- Navigation: Fixed sidebar and mobile menu.
-- Graphics: None required for this summary, relying on clean typography and layout. -->
-<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>phpFox Buyer Persona - Summary Report</title>
+    <title>phpFox Buyer Persona</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-            color: #1e293b; /* slate-800 */
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-        .nav-link.active {
-            background-color: #f1f5f9; /* slate-100 */
-            border-left-color: #0d9488; /* teal-600 */
-            color: #0d9488;
-            font-weight: 600;
-        }
-        .nav-link:hover {
-            background-color: #f1f5f9; /* slate-100 */
-            color: #0f766e; /* teal-700 */
-        }
-        .section-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            border: 1px solid #e2e8f0; /* slate-200 */
-        }
-        .section-title {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: #0f172a; /* slate-900 */
-            margin-bottom: 0.5rem;
-            border-bottom: 2px solid #0d9488; /* teal-600 */
-            padding-bottom: 0.5rem;
-        }
-        .section-intro {
-            color: #475569; /* slate-600 */
-            margin-bottom: 2rem;
-            max-width: 800px;
-        }
-        .content-block {
-            background-color: #f8fafc; /* slate-50 */
-            border-radius: 0.5rem;
-            padding: 1rem;
-            border: 1px solid #cbd5e1; /* slate-300 */
-            margin-bottom: 1rem;
-        }
-        .content-heading {
-            font-weight: 600;
-            color: #334155; /* slate-700 */
-            margin-bottom: 0.5rem;
-        }
-        .content-list {
-            list-style-type: disc;
-            list-style-position: inside;
-            color: #475569; /* slate-600 */
-            margin-left: 1rem;
-        }
-        .kpi-card {
-            background-color: white;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            border: 1px solid #e2e8f0; /* slate-200 */
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
         }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 mb-4 rounded-lg p-2 bg-blue-100 shadow-md inline-block">
+                phpFox Buyer Persona
+            </h1>
+            <p class="text-xl text-gray-700 font-medium">Understanding Our Core Customer</p>
+        </header>
 
-    <div class="flex min-h-screen">
-        <!-- Sidebar Navigation -->
-        <nav id="sidebar" class="w-64 bg-white shadow-lg fixed h-full hidden lg:block overflow-y-auto">
-            <div class="p-6">
-                <h2 class="text-xl font-bold text-teal-700">phpFox Buyer Persona</h2>
-                <p class="text-sm text-slate-500">Summary Report</p>
-            </div>
-            <ul class="mt-6 space-y-1">
-                <li><a href="#overview" class="nav-link block py-3 px-6 text-slate-700">Overview</a></li>
-                <li><a href="#demographics" class="nav-link block py-3 px-6 text-slate-700">Demographics</a></li>
-                <li><a href="#interests" class="nav-link block py-3 px-6 text-slate-700">Interests / Online Behaviour</a></li>
-                <li><a href="#painpoints" class="nav-link block py-3 px-6 text-slate-700">Pain points</a></li>
-                <li><a href="#expectations" class="nav-link block py-3 px-6 text-slate-700">What they want/expect?</a></li>
-                <li><a href="#buying-behavior" class="nav-link block py-3 px-6 text-slate-700">Buying Behaviour</a></li>
-            </ul>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="w-full lg:ml-64 p-4 sm:p-6 lg:p-10">
-            <!-- Mobile Header & Menu Button -->
-            <header class="lg:hidden flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-teal-700">phpFox Buyer Persona</h2>
-                <button id="mobile-menu-button" class="p-2 rounded-md text-slate-600 hover:bg-slate-100">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </header>
-            
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mb-6 bg-white rounded-lg shadow">
-                 <ul class="space-y-1 p-2">
-                    <li><a href="#overview" class="nav-link block py-2 px-4 text-slate-700 rounded-md">Overview</a></li>
-                    <li><a href="#demographics" class="nav-link block py-2 px-4 text-slate-700 rounded-md">Demographics</a></li>
-                    <li><a href="#interests" class="nav-link block py-2 px-4 text-slate-700 rounded-md">Interests / Online Behaviour</a></li>
-                    <li><a href="#painpoints" class="nav-link block py-2 px-4 text-slate-700 rounded-md">Pain points</a></li>
-                    <li><a href="#expectations" class="nav-link block py-2 px-4 text-slate-700 rounded-md">What they want/expect?</a></li>
-                    <li><a href="#buying-behavior" class="nav-link block py-2 px-4 text-slate-700 rounded-md">Buying Behaviour</a></li>
-                </ul>
-            </div>
-
-            <!-- Section: Overview -->
-            <section id="overview" class="section-card mb-12">
-                <h2 class="section-title">phpFox Buyer Persona</h2>
-                <p class="section-intro">They are Primary Decision-Maker who directly make purchase.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="kpi-card">
-                        <p class="font-semibold text-slate-500">Primary Decision-Maker</p>
-                        <p class="text-xl font-bold text-teal-600 mt-2">Brand Founders, CEO, or Business owners</p>
-                    </div>
-                    <div class="kpi-card">
-                        <p class="font-semibold text-slate-500">Tech Comfort Level</p>
-                        <p class="text-xl font-bold text-teal-600 mt-2">Medium to high</p>
-                    </div>
-                    <div class="kpi-card">
-                        <p class="font-semibold text-slate-500">Business Size</p>
-                        <p class="text-xl font-bold text-teal-600 mt-2">Solo founder, or small team (2–20 people)</p>
-                    </div>
-                     <div class="kpi-card">
-                        <p class="font-semibold text-slate-500">Customer Type</p>
-                        <p class="text-xl font-bold text-teal-600 mt-2">Creators, Niche community builders, Niche coaches</p>
-                    </div>
+        <main class="space-y-12">
+            <!-- Primary Decision-Maker Section -->
+            <section class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-blue-200">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-blue-700 mb-4 pb-2 border-b-2 border-blue-300">
+                    Primary Decision-Maker
+                </h2>
+                <div class="text-gray-800 space-y-3">
+                    <p>They are individuals who **directly make purchase decisions**.</p>
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li><strong>Founders, CEOs, or Brand owners, Niche Creators, coaches.</strong></li>
+                        <li>These are people building community platforms as part of a business, not for personal or hobbyist use.</li>
+                        <li>They need a scalable platform to build online communities for their audience, clients, or students, often with monetization and growth in mind.</li>
+                    </ul>
+                    <p><strong>Tech comfort level:</strong> Medium to high — not always technical, but comfortable exploring tools.</p>
+                    <p><strong>Business size:</strong> Solo founder, or small team (2–20 people).</p>
                 </div>
             </section>
 
-            <!-- Section: Demographic -->
-            <section id="demographics" class="section-card mb-12">
-                <h2 class="section-title">Demographic</h2>
-                <div class="content-block">
-                    <p class="content-heading">Genders:</p>
-                    <p class="content-list">all genders. Most likely male.</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Location:</p>
-                    <p class="content-list">USA, Canada, Australia</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Income:</p>
-                    <p class="content-list">-</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Title:</p>
-                    <ul class="content-list space-y-1">
-                        <li>Brand Founder, CEO.</li>
-                        <li>Small business owners, entrepreneurs with a small team behind</li>
-                        <li>Creators (podcasters, YouTubers, writers) growing their own “audience empires”</li>
-                        <li>Coaches (business, lifestyle, health) monetizing niche expertise.</li>
+            <!-- Demographic Section -->
+            <section class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-blue-200">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-blue-700 mb-4 pb-2 border-b-2 border-blue-300">
+                    Demographic
+                </h2>
+                <div class="text-gray-800 space-y-3">
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li><strong>Genders:</strong> All genders. Most likely male.</li>
+                        <li><strong>Location:</strong> USA, Canada, Australia.</li>
+                        <li><strong>Income:</strong> Not specified, but implied to be business-oriented.</li>
+                        <li><strong>Title:</strong>
+                            <ul class="list-circle list-inside ml-6 space-y-0.5">
+                                <li>Brand Founder, CEO.</li>
+                                <li>Small business owners, entrepreneurs with a small team behind.</li>
+                                <li>Creators (podcasters, YouTubers, writers) growing their own “audience empires”.</li>
+                                <li>Coaches (business, lifestyle, health) monetizing niche expertise.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Education:</strong> Medium to high educated (Business, Marketing, Education, or Tech).</li>
                     </ul>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Education:</p>
-                    <p class="content-list">medium to high educated. (Business, Marketing, Education, or Tech)</p>
                 </div>
             </section>
 
-            <!-- Section: Interest / Online behaviour -->
-            <section id="interests" class="section-card mb-12">
-                <h2 class="section-title">Interest / Online behaviour</h2>
-                <div class="content-block">
-                    <p class="content-heading"></p>
-                    <p class="content-list">They're juggling strategy, content, niche monetization, member engagement, and platform tech. They’re looking for tools to make that easier.</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Research tools:</p>
-                    <ul class="content-list space-y-1">
-                        <li>YouTube, Google search, Reddit (e.g., r/Entrepreneur, r/SaaS)</li>
+            <!-- Interest / Online Behaviour Section -->
+            <section class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-blue-200">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-blue-700 mb-4 pb-2 border-b-2 border-blue-300">
+                    Interest / Online Behaviour
+                </h2>
+                <div class="text-gray-800 space-y-3">
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li>They're juggling strategy, content, niche monetization, member engagement, and platform tech. They’re looking for tools to make that easier.</li>
+                        <li><strong>Research tools:</strong> YouTube, Google search, Reddit (e.g., r/Entrepreneur, r/SaaS).</li>
+                        <li><strong>Read Reviews:</strong> G2, Capterra, Trustpilot, blog comparisons.</li>
+                        <li><strong>Hang out online:</strong> Americans are drawn to online forums like Reddit, Quora, and especially niche forums, for a variety of compelling reasons that tap into fundamental human needs for connection, information, and free expression.</li>
                     </ul>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Read Reviews:</p>
-                    <ul class="content-list space-y-1">
-                        <li>G2, Capterra, Trustpilot, blog comparisons</li>
-                    </ul>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Hang out online:</p>
-                    <p class="content-list">Americans are drawn to online forums like Reddit, Qoura, and especially niche forums, for a variety of compelling reasons that tap into fundamental human needs for connection, information, and free expression.</p>
                 </div>
             </section>
 
-            <!-- Section: Pain points -->
-            <section id="painpoints" class="section-card mb-12">
-                <h2 class="section-title">Pain points</h2>
-                <div class="content-block">
-                    <ul class="content-list space-y-1">
-                        <li>Host their community platform on generic social network such as Facebook Group that lack of control. They have to follow by Facebook's community standards and algorithms.</li>
-                        <li>Difficult to manage members, as they're dependent on the community itself. Lack of control over community data, user roles management</li>
-                        <li>Poor member engagement due to limited customization or lack of social features, monetization features</li>
-                        <li>Don't have budget for high development costs and time to build a platform from scratch</li>
-                        <li>Get annoyed by ads</li>
+            <!-- Pain Points Section -->
+            <section class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-blue-200">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-blue-700 mb-4 pb-2 border-b-2 border-blue-300">
+                    Pain Points
+                </h2>
+                <div class="text-gray-800 space-y-3">
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li>Host their community platform on generic social networks such as Facebook Group that lack control. They have to follow Facebook's community standards and algorithms.</li>
+                        <li>Difficult to manage members, as they're dependent on the community itself. Lack of control over community data, user roles management.</li>
+                        <li>Poor member engagement due to limited customization or lack of social features, monetization features.</li>
+                        <li>Don't have budget for high development costs and time to build a platform from scratch.</li>
+                        <li>Get annoyed by ads.</li>
                         <li>The platform is free, so they can't guarantee security. (This is critical for businesses.)</li>
                         <li>Under Third-party branding, not their own branding.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Section: What they want/ expect? -->
-            <section id="expectations" class="section-card mb-12">
-                <h2 class="section-title">What they want/ expect?</h2>
-                <p class="text-slate-600 mb-4">Ready to launch a community that give them the ability to:</p>
-                <div class="content-block">
-                    <p class="content-heading">Full Ownership & Control:</p>
-                    <p class="content-list">To own and control their community on their rules- without relying on social media standards and algorithms</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">White-label:</p>
-                    <p class="content-list">A platform that reflects their brand — not someone else’s</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Security:</p>
-                    <p class="content-list">Have full control over user data, security, access to the source code</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Community focused:</p>
-                    <p class="content-list">Built-in social features that reduce tech headaches: chat, member role management, group, forum…</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Monetization:</p>
-                    <p class="content-list">tools that allow selling subscriptions, courses, marketplace, exclusive content</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Seamless experience for members (mobile-first, easy to use, fast, intuitive)</p>
-                </div>
-                <h3 class="text-lg font-semibold text-teal-700 mt-6 mb-4">Desires underneath their expectation</h3>
-                <div class="content-block">
-                    <p class="content-heading">They want independence, freedom from algorithm-driven platforms</p>
-                    <p class="content-list">Motivator: “I want a space that I own”</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">They're building with long-term vision: grow from 100 to 10,000 members.</p>
-                    <p class="content-list">Motivator: “ I need a platform that grows with me “</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">They care deeply about brand experience and authority.</p>
-                    <p class="content-list">Motivator: “My community should look and feel like mine, not someone else’s.”</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">Creators, coaches, and founders want recurring income (subscriptions, paid groups, courses).</p>
-                    <p class="content-list">Motivator:“ making money online give me the freedom, flexibility”</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">They're motivated by impact. The social community tap into fundamental human needs for connection, information, and expression. and giving their audience a space to thrive.</p>
-                    <p class="content-list">Motivator: “I want to build a meaningful, active space for my people ”</p>
-                </div>
-            </section>
-
-            <!-- Section: Buying Behaviour -->
-            <section id="buying-behavior" class="section-card mb-12">
-                <h2 class="section-title">Buying Behaviour</h2>
-                <div class="content-block">
-                    <p class="content-heading">1. They search for real-world proof:</p>
-                    <p class="content-list">They read review sites, case studies, watch customer testimonials, join forums, or ask in niche community groups.</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">2. They test before they invest:</p>
-                    <p class="content-list">A demo, free trial, or product walk-through helps them feel in control. They prefer to explore the UI/ features and understand what’s possible without heavy commitment upfront. They open ticket asking for here and then about our product.</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">3.They evaluate based on long term fit — not just a quick-fix tool. They look for flexibility, customization, security, return on investment.</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">4. They buy when the timing + support align.</p>
-                    <p class="content-list">They are more likely to purchase if:</p>
-                    <ul class="content-list space-y-1 ml-4">
-                        <li>They see the value in phpFox as a tool for building a revenue model around their niche.</li>
-                        <li>We provide smooth onboarding trial and active support.</li>
-                        <li>There's a limited-time bonus or discount that feels low-risk</li>
-                        <li>Quick time-to-value (launch in 30–60 days)</li>
+            <!-- What they want/expect? Section -->
+            <section class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-blue-200">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-blue-700 mb-4 pb-2 border-b-2 border-blue-300">
+                    What They Want/Expect?
+                </h2>
+                <div class="text-gray-800 space-y-3">
+                    <p>Ready to launch a community that gives them the ability to:</p>
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li><strong>Full Ownership & Control:</strong> To own and control their community on their rules—without relying on social media standards and algorithms.</li>
+                        <li><strong>White-label:</strong> A platform that reflects their brand — not someone else’s.</li>
+                        <li><strong>Security:</strong> Have full control over user data, security, access to the source code.</li>
+                        <li><strong>Community focused:</strong> Built-in social features that reduce tech headaches: chat, member role management, group, forum…</li>
+                        <li><strong>Monetization:</strong> Tools that allow selling subscriptions, courses, marketplace, exclusive content.</li>
+                        <li><strong>Seamless experience for members:</strong> Mobile-first, easy to use, fast, intuitive.</li>
                     </ul>
                 </div>
-                <div class="content-block">
-                    <p class="content-heading">5. They might indirectly influenced by KOLs, friends, colleges.</p>
-                </div>
-                <div class="content-block">
-                    <p class="content-heading">6. They can buy our add-ons, and might look for customization service during a customer lifetime.</p>
+            </section>
+
+            <!-- Desires underneath their expectation Section -->
+            <section class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-blue-200">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-blue-700 mb-4 pb-2 border-b-2 border-blue-300">
+                    Desires Underneath Their Expectation
+                </h2>
+                <div class="text-gray-800 space-y-3">
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li>They want independence, freedom from algorithm-driven platforms.
+                            <p class="italic ml-4 text-gray-600"><strong>Motivator:</strong> “I want a space that I own.”</p>
+                        </li>
+                        <li>They're building with long-term vision: grow from 100 to 10,000 members.
+                            <p class="italic ml-4 text-gray-600"><strong>Motivator:</strong> “I need a platform that grows with me.”</p>
+                        </li>
+                        <li>They care deeply about brand experience and authority.
+                            <p class="italic ml-4 text-gray-600"><strong>Motivator:</strong> “My community should look and feel like mine, not someone else’s.”</p>
+                        </li>
+                        <li>Creators, coaches, and founders want recurring income (subscriptions, paid groups, courses).
+                            <p class="italic ml-4 text-gray-600"><strong>Motivator:</strong> “Making money online gives me the freedom, flexibility.”</p>
+                        </li>
+                        <li>They're motivated by impact. The social community taps into fundamental human needs for connection, information, and expression, and giving their audience a space to thrive.
+                            <p class="italic ml-4 text-gray-600"><strong>Motivator:</strong> “I want to build a meaningful, active space for my people.”</p>
+                        </li>
+                    </ul>
                 </div>
             </section>
 
+            <!-- Buying Behaviour Section -->
+            <section class="bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-blue-200">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-blue-700 mb-4 pb-2 border-b-2 border-blue-300">
+                    Buying Behaviour
+                </h2>
+                <div class="text-gray-800 space-y-3">
+                    <ol class="list-decimal list-inside space-y-1 ml-4">
+                        <li>They search for real-world proof: They read review sites, case studies, watch customer testimonials, join forums, or ask in niche community groups.</li>
+                        <li>They test before they invest: A demo, free trial, or product walk-through helps them feel in control. They prefer to explore the UI/features and understand what’s possible without heavy commitment upfront. They open ticket asking for here and then about our product.</li>
+                        <li>They evaluate based on long term fit — not just a quick-fix tool. They look for flexibility, customization, security, return on investment.</li>
+                        <li>They buy when the timing + support align.
+                            <ul class="list-circle list-inside ml-6 space-y-0.5">
+                                <li>They are more likely to purchase if:</li>
+                                <ul class="list-square list-inside ml-8 space-y-0.5">
+                                    <li>They see the value in phpFox as a tool for building a revenue model around their niche.</li>
+                                    <li>We provide smooth onboarding trial and active support.</li>
+                                    <li>There's a limited-time bonus or discount that feels low-risk.</li>
+                                    <li>Quick time-to-value (launch in 30–60 days).</li>
+                                </ul>
+                            </ul>
+                        </li>
+                        <li>They might be indirectly influenced by KOLs, friends, colleagues.</li>
+                        <li>They can buy our add-ons, and might look for customization service during a customer lifetime.</li>
+                    </ol>
+                </div>
+            </section>
         </main>
+
+        <footer class="text-center text-gray-600 mt-12 p-4 border-t border-gray-300">
+            <p>&copy; 2025 phpFox. All rights reserved.</p>
+        </footer>
     </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Active nav link on scroll
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    function changeNav() {
-        let index = sections.length;
-
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
-        
-        navLinks.forEach((link) => link.classList.remove('active'));
-        const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
-        if (activeLink) {
-            activeLink.classList.add('active');
-        }
-    }
-
-    window.addEventListener('scroll', changeNav);
-    changeNav(); 
-
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-
-    mobileMenu.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
-            mobileMenu.classList.add('hidden');
-        }
-    });
-});
-</script>
 </body>
 </html>
