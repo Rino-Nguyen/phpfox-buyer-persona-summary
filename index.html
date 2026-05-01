@@ -22,11 +22,11 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
                 <h1 class="text-2xl font-black text-slate-900 tracking-tight">HTN SOLUTIONS - DASHBOARD QUYẾT TOÁN ĐỢT 1</h1>
-                <p class="text-slate-500 text-sm font-medium">Dữ liệu đối soát: 40 Site | Vật tư thực tế | Uplink phát sinh</p>
+                <p class="text-slate-500 text-sm font-medium">Dữ liệu đối soát: 40 Site | Vật tư thực tế | Uplink phát sinh | Thiết bị</p>
             </div>
             <div class="flex gap-2">
                 <div class="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-bold shadow-lg shadow-blue-200 uppercase tracking-wider">Dữ liệu đã chốt</div>
-                <button onclick="window.print()" class="px-4 py-2 bg-white border border-slate-300 rounded-lg text-xs font-bold hover:bg-slate-50">In Báo Cáo</button>
+                <button onclick="window.print()" class="px-4 py-2 bg-white border border-slate-300 rounded-lg text-xs font-bold hover:bg-slate-50 transition-colors">In Báo Cáo</button>
             </div>
         </div>
 
@@ -56,6 +56,68 @@
                 <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Tủ 42U Đã Lắp</p>
                 <p id="total-cab" class="text-xl font-black text-slate-800 mt-1">41 Tủ</p>
                 <p class="text-[9px] text-slate-500 font-bold mt-1 uppercase tracking-tighter">8 HTN - 33 Thầu phụ</p>
+            </div>
+        </div>
+
+        <!-- NEW: Thiết Bị Summary Table -->
+        <div class="card p-0 overflow-hidden mb-8 border border-slate-100">
+            <div class="p-5 bg-white border-b flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-sm">Bảng Tổng Hợp Khối Lượng Thiết Bị Thi Công</h3>
+                    <p class="text-xs text-slate-500 mt-1">Tổng cộng Đợt 1 có <span class="font-bold text-slate-700">40 site</span> triển khai. Tổng thiết bị: <span class="font-bold text-slate-700">197 Sw Access</span>, <span class="font-bold text-slate-700">89 Sw PoE</span>, <span class="font-bold text-slate-700">700 AP cấp</span> và <span class="font-bold text-blue-600">624 AP lắp thực tế</span>.</p>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-xs text-left">
+                    <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold tracking-wider">
+                        <tr>
+                            <th class="p-4 pl-6">Đội Thi Công</th>
+                            <th class="p-4 text-center">Số Site</th>
+                            <th class="p-4 text-center">Switch Access</th>
+                            <th class="p-4 text-center">Switch PoE</th>
+                            <th class="p-4 text-center">AP Lắp Thực Tế</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="p-4 pl-6 font-bold text-indigo-700">Thừa</td>
+                            <td class="p-4 text-center font-medium">17</td>
+                            <td class="p-4 text-center font-medium text-slate-600">81</td>
+                            <td class="p-4 text-center font-medium text-slate-600">36</td>
+                            <td class="p-4 text-center font-black text-blue-600">264</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="p-4 pl-6 font-bold text-slate-700">Linh</td>
+                            <td class="p-4 text-center font-medium">15</td>
+                            <td class="p-4 text-center font-medium text-slate-600">59</td>
+                            <td class="p-4 text-center font-medium text-slate-600">31</td>
+                            <td class="p-4 text-center font-black text-blue-600">245</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="p-4 pl-6 font-bold text-emerald-700">Cường</td>
+                            <td class="p-4 text-center font-medium">5</td>
+                            <td class="p-4 text-center font-medium text-slate-600">44</td>
+                            <td class="p-4 text-center font-medium text-slate-600">17</td>
+                            <td class="p-4 text-center font-black text-blue-600">79</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="p-4 pl-6 font-bold text-amber-600">Kiên</td>
+                            <td class="p-4 text-center font-medium">3</td>
+                            <td class="p-4 text-center font-medium text-slate-600">13</td>
+                            <td class="p-4 text-center font-medium text-slate-600">5</td>
+                            <td class="p-4 text-center font-black text-blue-600">36</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="bg-blue-50/50">
+                        <tr>
+                            <td class="p-4 pl-6 font-black text-slate-800">TỔNG CỘNG</td>
+                            <td class="p-4 text-center font-black text-slate-800">40</td>
+                            <td class="p-4 text-center font-black text-slate-800">197</td>
+                            <td class="p-4 text-center font-black text-slate-800">89</td>
+                            <td class="p-4 text-center font-black text-blue-700 text-sm">624</td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
 
@@ -115,7 +177,7 @@
                             <div class="flex justify-between mt-0.5 text-orange-400 font-bold"><span>3 thùng Comscope:</span><span>9,000,000đ</span></div>
                         </div>
                         <div>
-                            <p class="font-bold text-blue-200">Phường Tân Đông Hiệp</p>
+                            <p class="font-bold text-blue-200">P. Tân Đông Hiệp</p>
                             <div class="flex justify-between mt-1 text-red-400 font-bold italic"><span>P/S kéo cáp đứt:</span><span>1,400,000đ</span></div>
                         </div>
                     </div>
@@ -137,7 +199,7 @@
         // Mapping HTN Sites
         const htn_stt = [1, 8, 9, 10, 11, 21, 26, 27];
         
-        // Full Data from text blocks
+        // Full Data
         const rawData = [
             { stt: 1, site: "Phường Sài Gòn", team: "Thừa", ap: 15, cable: 390, material: 162000, uplink: 4, cab: 1 },
             { stt: 2, site: "Phường Xuân Hòa", team: "Thừa", ap: 22, cable: 414, material: 180000, uplink: 4, cab: 1 },
@@ -185,11 +247,9 @@
             const isHTN = htn_stt.includes(item.stt);
             let total = 0;
             if (item.team === "Cường") {
-                // Rule Cường: 180k/node + 100k/AP. Site 37 Cường thầu lắp tủ -> +600k (6 thiet bi)
                 total = (item.ap * 180000) + (item.ap * 100000) + (item.stt === 37 ? 600000 : 0);
                 if (item.extra) total += item.extra;
             } else {
-                // Rule Thừa/Linh/Kiên: 550k trọn gói node + 1.5M/tủ (nếu thầu lắp)
                 total = (item.ap * 550000) + (!isHTN ? 1500000 : 0);
             }
             if (item.airfare) total += item.airfare;
@@ -209,7 +269,7 @@
             tData[item.team] += labor;
 
             const tr = document.createElement('tr');
-            tr.className = "hover:bg-slate-50 transition-colors border-b border-slate-50";
+            tr.className = "hover:bg-blue-50/50 transition-colors border-b border-slate-50";
             tr.innerHTML = `
                 <td class="p-4 text-center text-slate-400 font-bold">${item.stt}</td>
                 <td class="p-4 font-bold text-slate-700">${item.site}</td>
@@ -248,3 +308,6 @@
     </script>
 </body>
 </html>
+```eof
+
+Chỉ cần lưu mã HTML này và mở bằng trình duyệt (Chrome, Edge...), bạn sẽ thấy ngay Dashboard chạy cực kỳ mượt mà, sẵn sàng xuất file báo cáo rồi đấy.
