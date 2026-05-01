@@ -21,53 +21,56 @@
         <!-- Header -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div>
-                <h1 class="text-2xl font-extrabold text-slate-800">HTN SOLUTIONS - DASHBOARD ĐỢT 1</h1>
-                <p class="text-slate-500 text-sm font-medium">Đối soát 40 Site: Phân tách Nhân công, Vật tư & Uplink</p>
+                <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">HTN SOLUTIONS - DASHBOARD ĐỢT 1</h1>
+                <p class="text-slate-500 text-sm font-medium">Báo cáo quyết toán chuẩn: Vật tư, Cáp & Uplink phát sinh</p>
             </div>
             <div class="flex gap-3">
                 <div class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-bold shadow-lg shadow-blue-200">Dữ liệu Chuẩn</div>
-                <button onclick="window.print()" class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold hover:bg-slate-50">Xuất PDF</button>
+                <button onclick="window.print()" class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold hover:bg-slate-50 transition-all">Xuất Báo Cáo</button>
             </div>
         </div>
 
         <!-- KPI Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
             <div class="card p-5 border-t-4 border-blue-600">
-                <p class="text-slate-400 text-[10px] font-bold uppercase">Tổng Nhân Công</p>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Tổng Nhân Công</p>
                 <p id="total-labor" class="text-xl font-black text-slate-800 mt-1">0đ</p>
             </div>
             <div class="card p-5 border-t-4 border-emerald-500">
-                <p class="text-slate-400 text-[10px] font-bold uppercase">Tổng Vật Tư Phụ</p>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Tổng Vật Tư Phụ</p>
                 <p id="total-material" class="text-xl font-black text-slate-800 mt-1">0đ</p>
             </div>
             <div class="card p-5 border-t-4 border-orange-500">
-                <p class="text-slate-400 text-[10px] font-bold uppercase">Uplink Phát Sinh</p>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Uplink Phát Sinh</p>
                 <p id="total-uplink" class="text-xl font-black text-slate-800 mt-1">0 Node</p>
             </div>
             <div class="card p-5 border-t-4 border-indigo-500">
-                <p class="text-slate-400 text-[10px] font-bold uppercase">Tổng Mét Cáp</p>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Tổng Mét Cáp</p>
                 <p id="total-cable" class="text-xl font-black text-slate-800 mt-1">0m</p>
             </div>
             <div class="card p-5 border-t-4 border-slate-800">
-                <p class="text-slate-400 text-[10px] font-bold uppercase">Tổng Tủ 42U</p>
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Tổng Tủ 42U</p>
                 <p id="total-cab" class="text-xl font-black text-slate-800 mt-1">41 Tủ</p>
             </div>
         </div>
 
         <!-- Main Content -->
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <!-- Table Section -->
             <div class="lg:col-span-3 card p-0 overflow-hidden border border-slate-100">
                 <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
-                    <h3 class="font-bold text-slate-700 text-sm">Bảng chi tiết 40 Site thực tế</h3>
-                    <span class="text-[10px] text-slate-400 font-medium italic">* Phí nhân công đã bao gồm lắp tủ (nếu thầu lắp)</span>
+                    <h3 class="font-bold text-slate-700 text-sm">Chi tiết 40 Site thi công thực tế</h3>
+                    <div class="flex gap-4">
+                        <span class="text-[10px] text-blue-600 font-bold">● HTN Lắp Tủ</span>
+                        <span class="text-[10px] text-slate-400 font-bold">○ Thầu Lắp Tủ</span>
+                    </div>
                 </div>
                 <div class="table-container">
                     <table class="w-full text-xs text-left">
-                        <thead class="sticky top-0 gradient-header text-white font-bold uppercase text-[9px] tracking-wider z-20">
+                        <thead class="sticky top-0 gradient-header text-white font-bold uppercase text-[9px] tracking-widest z-20">
                             <tr>
                                 <th class="p-4 text-center">STT</th>
-                                <th class="p-4">Site Phường / Xã</th>
+                                <th class="p-4">Tên Phường / Xã</th>
                                 <th class="p-4">Đội</th>
                                 <th class="p-4 text-center">Cáp (m)</th>
                                 <th class="p-4 text-center">Uplink</th>
@@ -77,36 +80,44 @@
                             </tr>
                         </thead>
                         <tbody id="mainTable" class="divide-y divide-slate-100">
-                            <!-- Rows go here -->
+                            <!-- JS injects rows -->
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Sidebar Info -->
+            <!-- Sidebar -->
             <div class="lg:col-span-1 space-y-6">
                 <div class="card p-5">
-                    <h3 class="font-bold text-slate-800 mb-4 text-sm border-b pb-2">Biểu đồ Nhân Công</h3>
+                    <h3 class="font-bold text-slate-800 mb-4 text-sm border-b pb-2">Tỷ lệ Quyết toán Đội</h3>
                     <div class="h-48">
                         <canvas id="laborChart"></canvas>
                     </div>
                 </div>
+                
                 <div class="card p-5 bg-slate-900 text-white">
-                    <h3 class="font-bold text-blue-400 mb-3 text-xs uppercase">📍 Đặc biệt: Côn Đảo</h3>
-                    <div class="space-y-2 text-[11px]">
-                        <div class="flex justify-between"><span>Vật tư thi công:</span><span class="font-bold">7,206,000đ</span></div>
-                        <div class="flex justify-between text-yellow-400"><span>Vé máy bay:</span><span class="font-bold">3,700,000đ</span></div>
-                        <div class="pt-2 border-t border-slate-700">
-                            <p class="text-slate-400 italic">Đội Kiên phụ trách 15 AP</p>
+                    <h3 class="font-bold text-blue-400 mb-4 text-xs uppercase tracking-widest">📍 Site Trọng Điểm</h3>
+                    <div class="space-y-4 text-[11px]">
+                        <div class="border-b border-slate-700 pb-2">
+                            <p class="font-bold text-slate-300">Đặc khu Côn Đảo</p>
+                            <div class="flex justify-between mt-1"><span>Vật tư:</span><span>7,206,000đ</span></div>
+                            <div class="flex justify-between text-yellow-400"><span>Vé máy bay:</span><span>3,700,000đ</span></div>
+                        </div>
+                        <div class="border-b border-slate-700 pb-2">
+                            <p class="font-bold text-slate-300">Xã Hóc Môn</p>
+                            <div class="flex justify-between mt-1"><span>Vật tư (3 thùng cáp):</span><span>9,239,000đ</span></div>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-300">P. Tân Đông Hiệp</p>
+                            <div class="flex justify-between mt-1 text-red-400 font-medium"><span>P/S kéo cáp đứt:</span><span>1,400,000đ</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="card p-5 bg-amber-50 border border-amber-200">
-                    <h3 class="font-bold text-amber-800 mb-3 text-xs uppercase">HTN Trực tiếp lắp tủ</h3>
-                    <div class="grid grid-cols-1 gap-1 text-[10px] text-amber-700 font-medium italic">
-                        <p>• P. Sài Gòn, Bình Phú, Tân Mỹ</p>
-                        <p>• P. Phú Định, Bình Đông, Thủ Đức</p>
-                        <p>• Xã Bình Chánh, Bình Hưng</p>
+
+                <div class="card p-5 bg-blue-50 border border-blue-100">
+                    <h3 class="font-bold text-blue-800 mb-3 text-xs uppercase tracking-widest">HTN Trực tiếp lắp tủ</h3>
+                    <div class="text-[10px] text-blue-700 font-medium leading-relaxed italic">
+                        1. P. Sài Gòn | 8. P. Bình Phú | 9. P. Tân Mỹ | 10. P. Phú Định | 11. P. Bình Đông | 21. P. Thủ Đức | 26. Xã Bình Chánh | 27. Xã Bình Hưng
                     </div>
                 </div>
             </div>
@@ -114,79 +125,85 @@
     </div>
 
     <script>
-        const htn_stt = [1, 8, 10, 11, 9, 21, 26, 27]; // STT trong list Nghĩa vừa gửi (mapping map ID)
+        // Mapping HTN Cabinet STT
+        const htn_stt = [1, 8, 9, 10, 11, 21, 26, 27];
         
+        // Data updated from text block
         const data = [
             { stt: 1, site: "Phường Sài Gòn", team: "Thừa", cable: 390, material: 162000, uplink: 4, ap: 14, cab: 1 },
-            { stt: 2, site: "Phường Xuân Hòa", team: "Thừa", cable: 414, material: 180000, uplink: 4, ap: 21, cab: 1 },
-            { stt: 8, site: "Phường Bình Phú", team: "Thừa", cable: 232, material: 201000, uplink: 0, ap: 10, cab: 1 },
-            { stt: 5, site: "Phường Chợ Quán", team: "Thừa", cable: 185, material: 539000, uplink: 4, ap: 10, cab: 1 },
-            { stt: 10, site: "Phường Phú Định", team: "Linh", cable: 499, material: 326000, uplink: 4, ap: 14, cab: 1 },
-            { stt: 11, site: "Phường Bình Đông", team: "Linh", cable: 479, material: 381000, uplink: 4, ap: 16, cab: 1 }, // +30k ship
-            { stt: 3, site: "Phường Xóm Chiếu", team: "Linh", cable: 515, material: 163000, uplink: 4, ap: 15, cab: 1 },
-            { stt: 4, site: "Phường Vĩnh Hội", team: "Thừa", cable: 399, material: 175000, uplink: 4, ap: 18, cab: 1 },
-            { stt: 6, site: "Phường An Đông", team: "Thừa", cable: 580, material: 665000, uplink: 4, ap: 25, cab: 1 },
-            { stt: 9, site: "Phường Tân Mỹ", team: "Thừa", cable: 628, material: 234000, uplink: 2, ap: 15, cab: 1 },
-            { stt: 31, site: "Xã Nhà Bè", team: "Linh", cable: 710, material: 80000, uplink: 4, ap: 23, cab: 1 },
-            { stt: 7, site: "Phường Bình Tiên", team: "Linh", cable: 870, material: 150000, uplink: 4, ap: 23, cab: 1 },
-            { stt: 17, site: "Phường Gò Vấp", team: "Thừa", cable: 480, material: 858000, uplink: 5, ap: 17, cab: 1 }, // 803k + 55k
-            { stt: 18, site: "Phường An Hội Đông", team: "Thừa", cable: 332, material: 0, uplink: 0, ap: 11, cab: 1 },
-            { stt: 20, site: "Phường Tân Hòa", team: "Linh", cable: 209, material: 65000, uplink: 0, ap: 15, cab: 1 },
-            { stt: 15, site: "Phường Gia Định", team: "Thừa", cable: 428, material: 395000, uplink: 4, ap: 10, cab: 1 },
-            { stt: 19, site: "Phường Phú Nhuận", team: "Thừa", cable: 711, material: 29000, uplink: 4, ap: 30, cab: 1 },
-            { stt: 16, site: "Phường Bình Thạnh", team: "Thừa", cable: 475, material: 240000, uplink: 4, ap: 15, cab: 1 },
-            { stt: 14, site: "Phường Bình Trị Đông", team: "Linh", cable: 184, material: 160000, uplink: 4, ap: 7, cab: 1 },
-            { stt: 12, site: "Phường Hòa Hưng", team: "Linh", cable: 498, material: 673000, uplink: 4, ap: 15, cab: 1 }, // 425k + 248k
-            { stt: 13, site: "Phường Bình Thới", team: "Linh", cable: 660, material: 520000, uplink: 0, ap: 14, cab: 1 },
-            { stt: 21, site: "Phường Thủ Đức", team: "Thừa", cable: 497, material: 86000, uplink: 4, ap: 10, cab: 1 },
-            { stt: 23, site: "Phường Tăng Nhơn Phú", team: "Thừa", cable: 388, material: 480000, uplink: 4, ap: 15, cab: 1 },
-            { stt: 24, site: "Xã Bình Khánh", team: "Linh", cable: 470, material: 385000, uplink: 0, ap: 15, cab: 1 },
-            { stt: 38, site: "Phường Vũng Tàu", team: "Kiên", cable: 665, material: 2551000, uplink: 0, ap: 15, cab: 1 },
-            { stt: 39, site: "Xã Đất Đỏ", team: "Kiên", cable: 250, material: 0, uplink: 0, ap: 6, cab: 1 },
-            { stt: 28, site: "Xã Đông Thạnh", team: "Linh", cable: 280, material: 0, uplink: 0, ap: 0, cab: 1 },
-            { stt: 29, site: "Xã Hóc Môn", team: "Linh", cable: 660, material: 9239000, uplink: 0, ap: 20, cab: 1 }, // +9M cáp
-            { stt: 30, site: "Xã Bà Điểm", team: "Linh", cable: 367, material: 290000, uplink: 0, ap: 15, cab: 1 },
-            { stt: 22, site: "TTHCC", team: "Thừa", cable: 536, material: 168000, uplink: 0, ap: 17, cab: 1 },
-            { stt: 25, site: "Xã Tân Nhựt", team: "Thừa", cable: 1721, material: 725000, uplink: 0, ap: 25, cab: 1 },
-            { stt: 26, site: "Xã Bình Chánh", team: "Thừa", cable: 421, material: 36000, uplink: 3, ap: 15, cab: 1 },
-            { stt: 27, site: "Xã Bình Hưng", team: "Linh", cable: 473, material: 744000, uplink: 0, ap: 15, cab: 1 },
-            { stt: 32, site: "Phường Dĩ An", team: "Linh", cable: 1052, material: 735000, uplink: 0, ap: 23, cab: 1 },
-            { stt: 33, site: "Phường Tân Đông Hiệp", team: "Cường", cable: 305, material: 1400000, uplink: 0, ap: 9, cab: 1 },
-            { stt: 34, site: "Phường Lái Thiêu", team: "Cường", cable: 835, material: 575000, uplink: 0, ap: 18, cab: 1 },
-            { stt: 35, site: "Phường Thủ Dầu Một", team: "Cường", cable: 900, material: 3237000, uplink: 0, ap: 28, cab: 1 },
-            { stt: 36, site: "Xã Bàu Bàng", team: "Cường", cable: 300, material: 0, uplink: 0, ap: 13, cab: 1 },
-            { stt: 37, site: "Xã Minh Thạnh", team: "Cường", cable: 500, material: 460000, uplink: 0, ap: 11, cab: 1 },
-            { stt: 40, site: "Đặc khu Côn Đảo", team: "Kiên", cable: 600, material: 7206000, uplink: 0, ap: 15, cab: 1, airfare: 3700000 }
+            { stt: 6, site: "Phường Xuân Hòa", team: "Thừa", cable: 414, material: 180000, uplink: 4, ap: 21, cab: 1 },
+            { stt: 16, site: "Phường Bình Phú", team: "Thừa", cable: 232, material: 201000, uplink: 0, ap: 10, cab: 1 },
+            { stt: 11, site: "Phường Chợ Quán", team: "Thừa", cable: 185, material: 539000, uplink: 4, ap: 10, cab: 1 },
+            { stt: 23, site: "Phường Phú Định", team: "Linh", cable: 499, material: 326000, uplink: 4, ap: 14, cab: 1 },
+            { stt: 24, site: "Phường Bình Đông", team: "Linh", cable: 479, material: 351000, uplink: 4, ap: 16, cab: 1 },
+            { stt: 8, site: "Phường Xóm Chiếu", team: "Linh", cable: 515, material: 163000, uplink: 4, ap: 15, cab: 1 },
+            { stt: 10, site: "Phường Vĩnh Hội", team: "Thừa", cable: 399, material: 175000, uplink: 4, ap: 18, cab: 1 },
+            { stt: 12, site: "Phường An Đông", team: "Thừa", cable: 580, material: 665000, uplink: 4, ap: 25, cab: 1 },
+            { stt: 20, site: "Phường Tân Mỹ", team: "Thừa", cable: 628, material: 234000, uplink: 2, ap: 15, cab: 1 },
+            { stt: 101, site: "Xã Nhà Bè", team: "Linh", cable: 710, material: 80000, uplink: 4, ap: 23, cab: 1 },
+            { stt: 15, site: "Phường Bình Tiên", team: "Linh", cable: 870, material: 150000, uplink: 4, ap: 23, cab: 1 },
+            { stt: 49, site: "Phường Gò Vấp", team: "Thừa", cable: 480, material: 803000, uplink: 5, ap: 17, cab: 1 },
+            { stt: 50, site: "Phường An Hội Đông", team: "Thừa", cable: 332, material: 0, uplink: 0, ap: 11, cab: 1 },
+            { stt: 58, site: "Phường Tân Hòa", team: "Linh", cable: 209, material: 65000, uplink: 0, ap: 15, cab: 1 },
+            { stt: 42, site: "Phường Gia Định", team: "Thừa", cable: 428, material: 395000, uplink: 4, ap: 10, cab: 1 },
+            { stt: 55, site: "Phường Phú Nhuận", team: "Thừa", cable: 711, material: 29000, uplink: 4, ap: 30, cab: 1 },
+            { stt: 43, site: "Phường Bình Thạnh", team: "Thừa", cable: 475, material: 240000, uplink: 4, ap: 15, cab: 1 },
+            { stt: 40, site: "Phường Bình Trị Đông", team: "Linh", cable: 184, material: 160000, uplink: 4, ap: 7, cab: 1 },
+            { stt: 27, site: "Phường Hòa Hưng", team: "Linh", cable: 498, material: 425000, uplink: 4, ap: 15, cab: 1 },
+            { stt: 29, site: "Phường Bình Thới", team: "Linh", cable: 660, material: 520000, uplink: 0, ap: 14, cab: 1 },
+            { stt: 68, site: "Phường Thủ Đức", team: "Thừa", cable: 497, material: 86000, uplink: 4, ap: 10, cab: 1 },
+            { stt: 71, site: "Phường Tăng Nhơn Phú", team: "Thừa", cable: 388, material: 480000, uplink: 4, ap: 15, cab: 1 },
+            { stt: 78, site: "Xã Bình Khánh", team: "Linh", cable: 470, material: 385000, uplink: 0, ap: 15, cab: 1 },
+            { stt: 139, site: "Phường Vũng Tàu", team: "Kiên", cable: 665, material: 2551000, uplink: 0, ap: 15, cab: 1 },
+            { stt: 155, site: "Xã Đất Đỏ", team: "Kiên", cable: 250, material: 0, uplink: 0, ap: 6, cab: 1 },
+            { stt: 97, site: "Xã Đông Thạnh", team: "Linh", cable: 280, material: 0, uplink: 0, ap: 0, cab: 1 },
+            { stt: 98, site: "Xã Hóc Môn", team: "Linh", cable: 660, material: 9239000, uplink: 0, ap: 20, cab: 1 },
+            { stt: 100, site: "Xã Bà Điểm", team: "Linh", cable: 367, material: 290000, uplink: 0, ap: 15, cab: 1 },
+            { stt: 68.1, site: "TTHCC", team: "Thừa", cable: 536, material: 168000, uplink: 0, ap: 17, cab: 1 },
+            { stt: 82, site: "Xã Tân Nhựt", team: "Thừa", cable: 1721, material: 725000, uplink: 0, ap: 25, cab: 1 },
+            { stt: 83, site: "Xã Bình Chánh", team: "Thừa", cable: 421, material: 36000, uplink: 4, ap: 15, cab: 1 },
+            { stt: 85, site: "Xã Bình Hưng", team: "Linh", cable: 473, material: 744000, uplink: 0, ap: 15, cab: 1 },
+            { stt: 104, site: "Phường Dĩ An", team: "Linh", cable: 1052, material: 735000, uplink: 0, ap: 23, cab: 1 },
+            { stt: 105, site: "Phường Tân Đông Hiệp", team: "Cường", cable: 305, material: 0, extra: 1400000, uplink: 0, ap: 9, cab: 1 },
+            { stt: 108, site: "Phường Lái Thiêu", team: "Cường", cable: 835, material: 575000, uplink: 0, ap: 18, cab: 1 },
+            { stt: 111, site: "Phường Thủ Dầu Một", team: "Cường", cable: 900, material: 3237000, uplink: 0, ap: 28, cab: 1 },
+            { stt: 133, site: "Xã Bàu Bàng", team: "Cường", cable: 300, material: 0, uplink: 0, ap: 13, cab: 1 },
+            { stt: 138, site: "Xã Minh Thạnh", team: "Cường", cable: 500, material: 460000, uplink: 0, ap: 11, cab: 1 },
+            { stt: 168, site: "Đặc khu Côn Đảo", team: "Kiên", cable: 600, material: 7206000, uplink: 0, ap: 15, cab: 1, airfare: 3700000 }
         ];
 
-        function calc(item) {
+        function calculate(item) {
             const isHTN = htn_stt.includes(item.stt);
             let labor = 0;
             if (item.team === "Cường") {
+                // 180k kéo + 100k lắp. Site Cường lắp 1 tủ -> tính thêm 6 thiết bị * 100k (600k)
                 labor = (item.ap * 180000) + (item.ap * 100000) + (!isHTN ? 600000 : 0);
+                if (item.extra) labor += item.extra;
             } else {
+                // 550k/node + 1.5M tủ
                 labor = (item.ap * 550000) + (!isHTN ? 1500000 : 0);
             }
-            if (item.stt === 40) labor += 3700000;
+            if (item.stt === 168) labor += (item.airfare || 0);
             return labor;
         }
 
-        let tL = 0, tM = 0, tC = 0, tU = 0;
+        let totalL = 0, totalM = 0, totalC = 0, totalU = 0, totalCabCount = 0;
         let tData = { "Thừa": 0, "Linh": 0, "Cường": 0, "Kiên": 0 };
 
         const tbody = document.getElementById('mainTable');
         data.forEach(item => {
-            const labor = calc(item);
+            const labor = calculate(item);
             const isHTN = htn_stt.includes(item.stt);
-            tL += labor; tM += item.material; tC += item.cable; tU += item.uplink;
+            totalL += labor; totalM += item.material; totalC += item.cable; totalU += item.uplink;
+            if (item.cab) totalCabCount++;
             tData[item.team] += labor;
 
             const tr = document.createElement('tr');
-            tr.className = "hover:bg-slate-50 border-b border-slate-50";
+            tr.className = "hover:bg-blue-50/50 transition-all border-b border-slate-50";
             tr.innerHTML = `
                 <td class="p-4 text-center text-slate-400 font-bold">${item.stt}</td>
                 <td class="p-4 font-bold text-slate-700">${item.site}</td>
-                <td class="p-4"><span class="px-2 py-0.5 bg-slate-100 rounded text-[9px] font-black uppercase text-slate-600">${item.team}</span></td>
+                <td class="p-4"><span class="px-2 py-0.5 bg-slate-100 rounded text-[9px] font-black uppercase text-slate-600 tracking-tight">${item.team}</span></td>
                 <td class="p-4 text-center font-medium">${item.cable.toLocaleString()}m</td>
                 <td class="p-4 text-center font-bold text-orange-600">${item.uplink > 0 ? item.uplink + ' node' : '-'}</td>
                 <td class="p-4 text-center">${isHTN ? '<span class="text-blue-500 font-black italic text-[9px]">HTN Lắp</span>' : '<span class="text-slate-300 font-bold text-[9px]">Thầu Lắp</span>'}</td>
@@ -196,11 +213,14 @@
             tbody.appendChild(tr);
         });
 
-        document.getElementById('total-labor').innerText = tL.toLocaleString() + 'đ';
-        document.getElementById('total-material').innerText = tM.toLocaleString() + 'đ';
-        document.getElementById('total-cable').innerText = tC.toLocaleString() + 'm';
-        document.getElementById('total-uplink').innerText = tU + ' Node';
+        // Update KPIs
+        document.getElementById('total-labor').innerText = totalL.toLocaleString() + 'đ';
+        document.getElementById('total-material').innerText = totalM.toLocaleString() + 'đ';
+        document.getElementById('total-cable').innerText = totalC.toLocaleString() + 'm';
+        document.getElementById('total-uplink').innerText = totalU + ' Node';
+        document.getElementById('total-cab').innerText = totalCabCount + ' Tủ';
 
+        // Chart
         new Chart(document.getElementById('laborChart'), {
             type: 'doughnut',
             data: {
@@ -212,7 +232,11 @@
                     borderColor: '#ffffff'
                 }]
             },
-            options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9, weight: 'bold' } } } }, cutout: '70%' }
+            options: { 
+                maintainAspectRatio: false, 
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9, weight: 'bold' } } } },
+                cutout: '70%' 
+            }
         });
     </script>
 </body>
